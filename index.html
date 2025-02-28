@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Deepu</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            color: red;
+            animation: bounce 1s infinite alternate, glow 2s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px yellow; }
+            100% { text-shadow: 0 0 20px white; }
+        }
+        .btn {
+            padding: 10px 20px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="welcome">
+        <h1>Happy Bday Deepu 💗💗🫂 My Bestieee 🥰🥰🫂🫂</h1>
+        <button class="btn" onclick="showQuiz()">Next</button>
+    </div>
+    
+    <div id="quiz" class="container">
+        <h2 id="question"></h2>
+        <button class="btn" onclick="answer('yes')">Yes</button>
+        <button class="btn" onclick="answer('no')">No</button>
+        <p id="quizResult"></p>
+        <button class="btn" onclick="prevQuestion()">Previous</button>
+        <button class="btn" onclick="nextQuestion()">Next</button>
+    </div>
+    
+    <div id="final" class="container">
+        <h2>Ek DM, Ek Raat Aur Ek Rishta Jo Bas Ban Hi Gaya" 💖</h2>
+        <p id="finalMessage"></p>
+    </div>
+
+    <script>
+        let currentPage = 0;
+        const pages = ["welcome", "quiz", "final"];
+        const questions = [
+            { text: "Pehle ham aapko bta de ki aap 19 ke ho gye ho😂😂", yes: "Hainaa ek dum breaking newz😂😂", no: "Yes kro!" },
+            { text: "Kya aap apne aapko chand se compare krte h?", yes: "KHER VAISE CHAND KO BHI APNE UPER ITNA GURUR NAHI H KYUKI USME BHI DAAG H 🥰💗", no: "firse khud ko underestimate kr lia😭😭" },
+            { text: "Kya aapke naam pr hamesha gussa raheta h?", yes: "Caught you😂😂😂", no: "Caught you😂😂😂" }
+        ];
+        let currentQuestion = 0;
+
+        function showPage(index) {
+            pages.forEach((id, i) => {
+                document.getElementById(id).style.display = i === index ? "block" : "none";
+            });
+        }
+        function showQuiz() { currentPage = 1; showPage(currentPage); showQuestion(); }
+        function showQuestion() { document.getElementById("question").textContent = questions[currentQuestion].text; }
+        function answer(choice) { document.getElementById("quizResult").textContent = questions[currentQuestion][choice]; }
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showFinalPage();
+            }
+        }
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+        function showFinalPage() {
+            currentPage = 2;
+            showPage(currentPage);
+            document.getElementById("finalMessage").innerHTML = `
+                27th July 2024…<br>
+                Ek DM aaya, ek ajeeb si vibe ke saath.<br>
+                Ek controversy se shuru hui baat,<br>
+                lekin kuch hi lafzon mein aisa connection bana ki<br>
+                jaise yeh dosti pehle se likhi hui thi. 🫂❤<br><br>
+                Us waqt jo ho raha tha, uspe kabhi baat nahi hoti,<br>
+                kyunki zaroori yeh nahi ki kya beeta, zaroori yeh hai ki aaj kya hai.<br>
+                Aur ab sochta hoon, accha hi hua…<br>
+                Nahi toh LJ aage bhi rulata.<br>
+                Par ab, jo bhi hai, sirf accha hai. 💖<br><br>
+                "Kuch log zindagi mein dukh ban kar nahi,<br>
+                Dawa ban kar aate hain." 💖<br><br>
+                Phir dheere-dheere baatein badhti gayi…<br>
+                Aur vibe itni mili ki har baat mein ek alag apnapan tha. 🥰<br>
+                Kabhi mazak, kabhi samjhna, kabhi gussa,<br>
+                Lekin har cheez mein ek rishta jo har emotion se upar tha.<br><br>
+                Aap mujhse 6 mahine badi sahi, lekin andar se abhi bhi bacchi hi hain! 😂<br>
+                19 saal ki ho gayi, lekin masoomiyat aaj bhi wahi hai.<br>
+                Haan, jab zarurat padi to maa bhi bani, teacher bhi,<br>
+                aur sabse zyada – meri sabse pyaari dost bhi. 🫂❤<br><br>
+                Aur ek cheez pakki hai –<br>
+                Har kalesh ke baad manana toh mujhe hi padta hai! 😂 (Chhota jo hoon na!)<br>
+                Aap gussa hongi, phir main sorry bolunga,<br>
+                Phir hans ke kahengi – "Chal, rehne de!" 😆<br><br>
+                🎉 Happy Birthday, Deepu! 🎂❤<br><br>
+                "Dost toh hazaar milenge, par aap jaisa koi nahi,<br>
+                Har baat mein hasi, har baat mein koi kahani nahi.<br>
+                Aapse jhagde bhi hote hain, par pyaar bhi utna hi hai,<br>
+                Chhoti si zindagi hai, bas yeh rishta kabhi puraana nahi!" 🫂❤<br>
+            `;
+        }
+        showPage(currentPage);
+    </script>
+</body>
+</html>
